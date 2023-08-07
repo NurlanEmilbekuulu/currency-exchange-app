@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Курс обмена валют на {{ rate.date|date:"d.m.Y" }}</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f0f0f0;
+    }
+
+    .header {
+      background-color: #4285f4;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .header h1 {
+      margin: 0;
+    }
+
+    .date-buttons {
+      margin-top: 10px;
+    }
+
+    .date-buttons button {
+      background-color: #fff;
+      border: 1px solid #4285f4;
+      color: #4285f4;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+
+    .date-buttons button:last-child {
+      margin-right: 0;
+    }
+
+    .date-buttons button:hover {
+      background-color: #4285f4;
+      color: #fff;
+    }
+
+    .exchange-rate {
+      margin: 30px auto;
+      max-width: 400px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+    }
+
+    .exchange-rate h2 {
+      font-size: 18px;
+      margin-top: 0;
+      margin-bottom: 15px;
+    }
+
+    .exchange-rate p {
+      margin: 0;
+      font-size: 16px;
+    }
+
+    /* Responsive Styles */
+    @media screen and (max-width: 600px) {
+      .date-buttons {
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      .date-buttons button {
+        flex: 1 0 40%;
+        margin: 5px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="header">
+    <h1>Курс обмена валют на {{ rate.date|date:"d.m.Y" }}</h1>
+    <div class="date-buttons">
+      <button onclick="getDate('today')">Сегодня</button>
+      <button onclick="getDate('yesterday')">Вчера</button>
+      <button onclick="getDate('day_before_yesterday')">Позавчера</button>
+    </div>
+  </div>
+  <div class="exchange-rate">
+    <h2>Дата: {{ rate.date|date:"d.m.Y" }}</h2>
+    <p>USD: {{ rate.usd_to_rub }}</p>
+    <p>EUR: {{ rate.eur_to_rub }}</p>
+  </div>
+</body>
+
+<script>
+  function getDate (date) {
+    window.location.href = `/?q=${date}`;
+  }
+</script>
+
+</html>
